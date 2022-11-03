@@ -1,0 +1,35 @@
+body {
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.score-table,
+.player-btns {
+    width: 75%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.button {
+    padding: 12.5px;
+    margin: 20px;
+    border-radius: 15px;
+}
+
+.score-display {
+    margin: 20px;
+    font-size: 3rem;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.button:hover {
+    background-color: blue;
+}
+
+.hide {
+    display: none;
+}
