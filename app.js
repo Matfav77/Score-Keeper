@@ -1,6 +1,7 @@
 const newPlayerForm = document.querySelector(".new-player-form");
-const submitBtn = document.querySelector(".new-player-form__btn");
 const nameInput = document.querySelector("#new-player-form__input");
+const submitBtn = document.querySelector(".new-player-form__btn");
+const removePlayerBtn = document.querySelector(".new-player-form__remove-btn")
 
 const scoreTable = document.querySelector(".score-table");
 const playerBtnsDisplay = document.querySelector(".player-btns");
@@ -38,12 +39,7 @@ newPlayerForm.addEventListener('submit', function (e) {
     }
 })
 
-// for (i = 0; i < playerList.length; i++) {
-//     playerList[i].button.addEventListener('click', function () {
-//         playerList[i].score++;
-//         this.innerText = playerList[i].score;
-//     })
-// }
+
 
 playerBtnsDisplay.addEventListener('click', function (e) {
     for (let i = 0; i < playerList.length; i++)
@@ -51,6 +47,12 @@ playerBtnsDisplay.addEventListener('click', function (e) {
             playerList[i].score++;
             playerList[i].display.innerText = playerList[i].score;
         }
+})
+
+removePlayerBtn.addEventListener('click', function () {
+    let removedPlayer = playerList.pop();
+    removedPlayer.display.classList.add("hide");
+    removedPlayer.button.classList.add("hide");
 })
 
 resetBtn.addEventListener('click', function () {
