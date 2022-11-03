@@ -46,9 +46,16 @@ newPlayerForm.addEventListener('submit', function (e) {
 // }
 
 playerBtnsDisplay.addEventListener('click', function (e) {
-    for (i = 0; i < playerList.length; i++)
+    for (let i = 0; i < playerList.length; i++)
         if (e.target === playerList[i].button) {
             playerList[i].score++;
             playerList[i].display.innerText = playerList[i].score;
         }
+})
+
+resetBtn.addEventListener('click', function () {
+    for (let i = 0; i < playerList.length; i++) {
+        playerList[i].score = 0;
+        playerList[i].display.innerText = playerList[i].score;
+    }
 })
