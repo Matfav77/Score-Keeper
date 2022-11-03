@@ -15,14 +15,21 @@
 <body>
     <h1>Interactive Score Keeper</h1>
 
-    <select name="" id="">
-        <option value=""></option>
-        <option value=""></option>
-        <option value=""></option>
-        <option value=""></option>
-        <option value=""></option>
-        <option value=""></option>
+    <label for="numberGamesToWin">Number of games needed to win:</label>
+    <select name="numberGamesToWin" id="numberGamesToWin">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
     </select>
+
+    <form action="" class="max-score-form">
+        <label for="max-score-form__input">Score to reach:</label>
+        <input type="text" placeholder="Enter target score" id="max-score-form__input">
+        <button class="max-score-form__button">Submit</button>
+    </form>
 
 
     <form action="" class="new-player-form">

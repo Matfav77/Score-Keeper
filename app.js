@@ -11,6 +11,11 @@ const resetBtn = document.querySelector(".reset-btn");
 const maxNumbPlayers = 8;
 const playerList = [];
 
+let maxScore = 1;
+let numberGamesToWin = 1;
+let isGameOver = false;
+
+
 newPlayerForm.addEventListener('submit', function (e) {
     e.preventDefault();
     if (playerList.length < maxNumbPlayers) {
@@ -25,6 +30,7 @@ newPlayerForm.addEventListener('submit', function (e) {
         playerBtnsDisplay.append(newScoreBtn);
         let newPlayer = {
             score: 0,
+            wins: 0,
             name: playerInput.value,
             display: newPlayerDisplay,
             button: newScoreBtn
@@ -39,8 +45,6 @@ newPlayerForm.addEventListener('submit', function (e) {
     }
 })
 
-
-
 playerBtnsDisplay.addEventListener('click', function (e) {
     for (let i = 0; i < playerList.length; i++)
         if (e.target === playerList[i].button) {
@@ -51,8 +55,10 @@ playerBtnsDisplay.addEventListener('click', function (e) {
 
 removePlayerBtn.addEventListener('click', function () {
     let removedPlayer = playerList.pop();
-    removedPlayer.display.classList.add("hide");
-    removedPlayer.button.classList.add("hide");
+    removedPlayer.display.remove();
+    removedPlayer.button.remove();
+    submitBtn.classList.remove("hide");
+    nameInput.classList.remove("hide");
 })
 
 resetBtn.addEventListener('click', function () {
