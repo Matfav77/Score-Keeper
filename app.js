@@ -1,7 +1,10 @@
+const numberOfGamesInput = document.querySelector("#numberGamesToWin");
+const targetScoreForm = document.querySelector(".max-score-form");
 const newPlayerForm = document.querySelector(".new-player-form");
 const nameInput = document.querySelector("#new-player-form__input");
 const submitBtn = document.querySelector(".new-player-form__btn");
 const removePlayerBtn = document.querySelector(".new-player-form__remove-btn")
+
 
 const scoreTable = document.querySelector(".score-table");
 const playerBtnsDisplay = document.querySelector(".player-btns");
@@ -11,8 +14,8 @@ const resetBtn = document.querySelector(".reset-btn");
 const maxNumbPlayers = 8;
 const playerList = [];
 
-let maxScore = 1;
-let numberGamesToWin = 1;
+let targetScore = 11;
+let numberOfGamesToWin = 1;
 let isGameOver = false;
 
 class Player {
@@ -24,6 +27,8 @@ class Player {
         this.button = button;
     }
 }
+
+// Functions to create DOM elements for new players
 
 function createPlayerDisplay() {
     newPlayerDisplay = document.createElement("span");
@@ -40,6 +45,8 @@ function createPlayerBtn(playerName) {
     playerBtnsDisplay.append(newScoreBtn);
     return newScoreBtn;
 }
+
+// Creation of a new player
 
 newPlayerForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -59,15 +66,27 @@ newPlayerForm.addEventListener('submit', function (e) {
     }
 })
 
-playerBtnsDisplay.addEventListener('click', function (e) {
-    for (let i = 0; i < playerList.length; i++)
-        if (e.target === playerList[i].button) {
-            playerList[i].score++;
-            playerList[i].display.innerText = playerList[i].score;
-        }
+// Making all buttons interactive
+
+numberOfGamesInput.addEventListener("change", (e) => {
+    numberOfGamesToWin = parseInt(e.target.value);
 })
 
-removePlayerBtn.addEventListener('click', function () {
+targetScoreForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    targetScore = parseInt(targetScoreForm.elements["targetScore"].value);
+})
+
+playerBtnsDisplay.addEventListener('click', (e) => {
+    for (let player of playerList) {
+        if (e.target === player.button) {
+            player.score++;
+            player.display.innerText = player.score;
+        }
+    }
+})
+
+removePlayerBtn.addEventListener('click', () => {
     let removedPlayer = playerList.pop();
     removedPlayer.display.remove();
     removedPlayer.button.remove();
@@ -75,7 +94,7 @@ removePlayerBtn.addEventListener('click', function () {
     nameInput.classList.remove("hide");
 })
 
-resetBtn.addEventListener('click', function () {
+resetBtn.addEventListener('click', () => {
     for (let player of playerList) {
         player.score = 0;
         player.display.innerText = player.score;
