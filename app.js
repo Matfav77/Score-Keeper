@@ -15,26 +15,40 @@ let maxScore = 1;
 let numberGamesToWin = 1;
 let isGameOver = false;
 
+class Player {
+    constructor(name, display, button) {
+        this.score = 0;
+        this.wins = 0;
+        this.name = name;
+        this.display = display;
+        this.button = button;
+    }
+}
+
+function createPlayerDisplay() {
+    newPlayerDisplay = document.createElement("span");
+    newPlayerDisplay.innerText = 0;
+    newPlayerDisplay.classList.add("score-display");
+    scoreTable.append(newPlayerDisplay);
+    return newPlayerDisplay;
+}
+
+function createPlayerBtn(playerName) {
+    let newScoreBtn = document.createElement("button");
+    newScoreBtn.classList.add("button");
+    newScoreBtn.innerText = `+1 ${playerName}`;
+    playerBtnsDisplay.append(newScoreBtn);
+    return newScoreBtn;
+}
 
 newPlayerForm.addEventListener('submit', function (e) {
     e.preventDefault();
     if (playerList.length < maxNumbPlayers) {
         let playerInput = newPlayerForm.elements["playerName"];
-        newPlayerDisplay = document.createElement("span");
-        newPlayerDisplay.innerText = 0;
-        newPlayerDisplay.classList.add("score-display");
-        scoreTable.append(newPlayerDisplay);
-        let newScoreBtn = document.createElement("button");
-        newScoreBtn.classList.add("button");
-        newScoreBtn.innerText = `+1 ${playerInput.value}`;
-        playerBtnsDisplay.append(newScoreBtn);
-        let newPlayer = {
-            score: 0,
-            wins: 0,
-            name: playerInput.value,
-            display: newPlayerDisplay,
-            button: newScoreBtn
-        }
+        const playerName = playerInput.value;
+        let newPlayerDisplay = createPlayerDisplay();
+        let newScoreBtn = createPlayerBtn(playerName);
+        let newPlayer = new Player(playerName, newPlayerDisplay, newScoreBtn);
         playerList.push(newPlayer);
         playerInput.value = "";
         if (playerList.length === maxNumbPlayers) {
@@ -62,8 +76,8 @@ removePlayerBtn.addEventListener('click', function () {
 })
 
 resetBtn.addEventListener('click', function () {
-    for (let i = 0; i < playerList.length; i++) {
-        playerList[i].score = 0;
-        playerList[i].display.innerText = playerList[i].score;
+    for (let player of playerList) {
+        player.score = 0;
+        player.display.innerText = player.score;
     }
 })
