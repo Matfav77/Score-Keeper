@@ -5,12 +5,17 @@ body {
     align-items: center;
 }
 
-.score-table,
-.player-btns {
+.score-table {
     width: 75%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
+}
+
+.player-controls {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
 }
 
 .button {

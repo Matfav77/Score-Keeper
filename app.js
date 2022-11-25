@@ -5,9 +5,7 @@ const nameInput = document.querySelector("#new-player-form__input");
 const submitBtn = document.querySelector(".new-player-form__btn");
 const removePlayerBtn = document.querySelector(".new-player-form__remove-btn")
 
-
 const scoreTable = document.querySelector(".score-table");
-const playerBtnsDisplay = document.querySelector(".player-btns");
 
 const resetBtn = document.querySelector(".reset-btn");
 
@@ -34,7 +32,6 @@ function createPlayerDisplay() {
     newPlayerDisplay = document.createElement("span");
     newPlayerDisplay.innerText = 0;
     newPlayerDisplay.classList.add("score-display");
-    scoreTable.append(newPlayerDisplay);
     return newPlayerDisplay;
 }
 
@@ -42,8 +39,14 @@ function createPlayerBtn(playerName) {
     let newScoreBtn = document.createElement("button");
     newScoreBtn.classList.add("button");
     newScoreBtn.innerText = `+1 ${playerName}`;
-    playerBtnsDisplay.append(newScoreBtn);
     return newScoreBtn;
+}
+
+function createPlayerControls(playerDisplay, playerBtn) {
+    let newPlayerControls = document.createElement("div");
+    newPlayerControls.classList.add("player-controls");
+    newPlayerControls.append(playerDisplay, playerBtn);
+    scoreTable.append(newPlayerControls);
 }
 
 // Creation of a new player
@@ -55,6 +58,7 @@ newPlayerForm.addEventListener('submit', function (e) {
         const playerName = playerInput.value;
         let newPlayerDisplay = createPlayerDisplay();
         let newScoreBtn = createPlayerBtn(playerName);
+        createPlayerControls(newPlayerDisplay, newScoreBtn);
         let newPlayer = new Player(playerName, newPlayerDisplay, newScoreBtn);
         playerList.push(newPlayer);
         playerInput.value = "";
@@ -77,7 +81,7 @@ targetScoreForm.addEventListener('submit', function (e) {
     targetScore = parseInt(targetScoreForm.elements["targetScore"].value);
 })
 
-playerBtnsDisplay.addEventListener('click', (e) => {
+scoreTable.addEventListener('click', (e) => {
     for (let player of playerList) {
         if (e.target === player.button) {
             player.score++;
@@ -100,3 +104,4 @@ resetBtn.addEventListener('click', () => {
         player.display.innerText = player.score;
     }
 })
+
