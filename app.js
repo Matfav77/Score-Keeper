@@ -49,6 +49,18 @@ function createPlayerControls(playerDisplay, playerBtn) {
     scoreTable.append(newPlayerControls);
 }
 
+// functions to run the game 
+
+function resetGame() {
+    isGameOver = false;
+    for (let player of playerList) {
+        player.score = 0;
+        player.wins = 0;
+        player.display.innerText = player.score;
+        player.display.classList.remove("winner", "loser");
+    }
+}
+
 // Creation of a new player
 
 newPlayerForm.addEventListener('submit', function (e) {
@@ -91,17 +103,13 @@ scoreTable.addEventListener('click', (e) => {
 })
 
 removePlayerBtn.addEventListener('click', () => {
+    document.querySelector(".new-player-form__label").innerText = "Enter a new player";
     let removedPlayer = playerList.pop();
     removedPlayer.display.remove();
     removedPlayer.button.remove();
+    scoreTable.lastElementChild.remove();
     submitBtn.classList.remove("hide");
     nameInput.classList.remove("hide");
 })
 
-resetBtn.addEventListener('click', () => {
-    for (let player of playerList) {
-        player.score = 0;
-        player.display.innerText = player.score;
-    }
-})
-
+resetBtn.addEventListener('click', resetGame);
